@@ -27,7 +27,16 @@ bool Yolo::readModel(Net &net, string &netPath,bool isCuda = false) {
 }
 bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 	Mat blob;
-	blobFromImage(SrcImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(0, 0, 0), true, false);
+	int col = SrcImg.cols;
+	int row = SrcImg.rows;
+	int maxLen = MAX(col, row);
+	Mat netInputImg = SrcImg.clone();
+	if (maxLen > 1.2*col || maxLen > 1.2*row) {
+		Mat resizeImg = Mat::zeros(maxLen, maxLen, CV_8UC3);
+		SrcImg.copyTo(resizeImg(Rect(0, 0, col, row)));
+		netInputImg = resizeImg;
+	}
+	blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(0, 0, 0), true, false);
 	net.setInput(blob);
 	std::vector<cv::Mat> netOutputImg;
 	//vector<string> outputLayerName{"345","403", "461","output" };
@@ -36,8 +45,8 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 	std::vector<int> classIds;//结果id数组
 	std::vector<float> confidences;//结果每个id对应置信度数组
 	std::vector<cv::Rect> boxes;//每个id矩形框
-	float ratio_h = (float)SrcImg.rows / netHeight;
-	float ratio_w = (float)SrcImg.cols / netWidth;
+	float ratio_h = (float)netInputImg.rows / netHeight;
+	float ratio_w = (float)netInputImg.cols / netWidth;
 	int net_width = className.size() + 5;  //输出的网络宽度是类别数+5
 	float* pdata = (float*)netOutputImg[0].data;
 	for (int stride =0; stride < 3; stride++) {    //stride
