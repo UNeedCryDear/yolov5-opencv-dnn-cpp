@@ -36,7 +36,7 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 		SrcImg.copyTo(resizeImg(Rect(0, 0, col, row)));
 		netInputImg = resizeImg;
 	}
-	blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(0, 0, 0), true, false);
+	blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(104, 117,123), true, false);
 	net.setInput(blob);
 	std::vector<cv::Mat> netOutputImg;
 	//vector<string> outputLayerName{"345","403", "461","output" };
