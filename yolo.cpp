@@ -56,7 +56,7 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 			const float anchor_w = netAnchors[stride][anchor * 2];
 			const float anchor_h = netAnchors[stride][anchor * 2 + 1];
 			for (int i = 0; i < grid_y; i++) {
-				for (int j = 0; j < grid_y; j++) {
+				for (int j = 0; j < grid_x; j++) {
 					float box_score = pdata[4]; //Sigmoid(pdata[4]);//获取每一行的box框中含有某个物体的概率
 					if (box_score > boxThreshold) {
 						cv::Mat scores(1, className.size(), CV_32FC1, pdata + 5);
