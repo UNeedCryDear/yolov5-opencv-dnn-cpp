@@ -15,8 +15,8 @@ int main()
 	int num_devices = cv::cuda::getCudaEnabledDeviceCount();
 
 	if (num_devices <= 0) {
-		cerr << "There is no device." << endl;
-		return -1;
+		cerr << "There is no cuda." << endl;
+		//return -1;
 	}
 	else {
 		cout << num_devices << endl;
@@ -43,7 +43,7 @@ int main()
 	vector<Output> result;
 	Mat img = imread(img_path);
 
-	if (test.Detect2(img, net, result)) {
+	if (test.Detect(img, net, result)) {
 		test.drawPred(img, result, color);
 
 	}
