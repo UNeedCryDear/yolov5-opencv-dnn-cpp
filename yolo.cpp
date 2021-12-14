@@ -37,6 +37,9 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 		netInputImg = resizeImg;
 	}
 	blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(104, 117,123), true, false);
+	//如果在其他设置没有问题的情况下但是结果偏差很大，可以尝试下用下面两句语句
+	//blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(0, 0,0), true, false);
+	//blobFromImage(netInputImg, blob, 1 / 255.0, cv::Size(netWidth, netHeight), cv::Scalar(114, 114,114), true, false);
 	net.setInput(blob);
 	std::vector<cv::Mat> netOutputImg;
 	//vector<string> outputLayerName{"345","403", "461","output" };
