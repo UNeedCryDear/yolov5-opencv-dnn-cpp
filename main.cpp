@@ -12,15 +12,14 @@ int main()
 {
 	string img_path = "./image/bus.jpg";
 	string model_path = "yolov5s.onnx";
-	int num_devices = cv::cuda::getCudaEnabledDeviceCount();
-
-	if (num_devices <= 0) {
-		cerr << "There is no cuda." << endl;
+	//int num_devices = cv::cuda::getCudaEnabledDeviceCount();
+	//if (num_devices <= 0) {
+		//cerr << "There is no cuda." << endl;
 		//return -1;
-	}
-	else {
-		cout << num_devices << endl;
-	}
+	//}
+	//else {
+		//cout << num_devices << endl;
+	//}
 
 	Yolo test;
 	Net net;
