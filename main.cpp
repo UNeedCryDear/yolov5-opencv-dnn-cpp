@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "yolo.h"
+#include <stdio.h>
 #include <iostream>
 #include<opencv2//opencv.hpp>
 #include<math.h>
+#include "yolo.h"
 
 using namespace std;
 using namespace cv;

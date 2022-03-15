@@ -1,4 +1,4 @@
-#include"stdafx.h"
+#include<stdio.h>
 #include"yolo.h";
 using namespace std;
 using namespace cv;
