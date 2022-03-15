@@ -88,7 +88,7 @@ bool Yolo::Detect(Mat &SrcImg, Net &net, vector<Output> &output) {
 
 	//执行非最大抑制以消除具有较低置信度的冗余重叠框（NMS）
 	vector<int> nms_result;
-	NMSBoxes(boxes, confidences, classThreshold, nmsThreshold, nms_result);
+	NMSBoxes(boxes, confidences, classThreshold * boxThreshold, nmsThreshold, nms_result);
 	for (int i = 0; i < nms_result.size(); i++) {
 		int idx = nms_result[i];
 		Output result;
