@@ -9,6 +9,10 @@ OpenCV>=4.5.0
  
 $ python path/to/export.py --weights yolov5s.pt --img [640,640] --opset 12 --include onnx
 
+2022.03.29 更新：
+新增P6模型支持，可以通过yolo.h中定义的YOLO_P6切换
+另外关于换行符，windows下面需要设置为CRLF，上传到github会自动切换成LF，windows下面切换一些即可
+
 ![zidane](https://user-images.githubusercontent.com/52729998/140441431-83d23a41-3ddc-4b19-984f-20aaf98fabc4.jpg)
 
 ![bus](https://user-images.githubusercontent.com/52729998/140441386-648007ef-3b27-4ecd-956d-36c50d6b5b0a.jpg)
