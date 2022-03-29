@@ -1,5 +1,5 @@
 #include"stdafx.h"
-#include"yolo.h";
+#include"yolo.h"
 using namespace std;
 using namespace cv;
 using namespace dnn;
