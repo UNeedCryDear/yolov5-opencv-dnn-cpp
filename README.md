@@ -8,9 +8,10 @@ OpenCV>=4.5.0
 导出onnx模型需要将opset设置成12（原来默认的是13，在opencv下面会报错，原因未知）
 如果是torch1.12.x的版本,需要在
 https://github.com/ultralytics/yolov5/blob/c98128fe71a8676037a0605ab389c7473c743d07/export.py#L155
-这里的```do_constant_folding=False```,设置为false才行，否者读取网络会失败，原因未知。
+这里的```do_constant_folding=False```,设置为false才行，否者读取网络会失败，原因未知。<br>
+```
 $ python path/to/export.py --weights yolov5s.pt --img [640,640] --opset 12 --include onnx
-
+```
 2022.03.29 更新：  
 
 新增P6模型支持，可以通过yolo.h中定义的YOLO_P6切换  
