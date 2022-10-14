@@ -42,6 +42,9 @@ bool Yolo::Detect(Mat& SrcImg, Net& net, vector<Output>& output) {
 	//vector<string> outputLayerName{"345","403", "461","output" };
 	//net.forward(netOutputImg, outputLayerName[3]); //获取output的输出
 	net.forward(netOutputImg, net.getUnconnectedOutLayersNames());
+#if CV_VERSION_MAJOR==4&&CV_VERSION_MINOR==6
+	std::sort(netOutputImg.begin(), netOutputImg.end(), [](Mat& A, Mat& B) {return A.size > B.size; });//opencv 4.6
+#endif
 	std::vector<int> classIds;//结果id数组
 	std::vector<float> confidences;//结果每个id对应置信度数组
 	std::vector<cv::Rect> boxes;//每个id矩形框
