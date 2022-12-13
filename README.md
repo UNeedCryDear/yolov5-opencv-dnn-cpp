@@ -12,7 +12,9 @@ https://github.com/ultralytics/yolov5/blob/c98128fe71a8676037a0605ab389c7473c743
 ```
 $ python path/to/export.py --weights yolov5s.pt --img [640,640] --opset 12 --include onnx
 ```
-2022.03.29 更新：  
+#### 2022.12.13 更新：
++ 如果你的显卡支持FP16推理的话，可以将模型读取代码中的```DNN_TARGET_CUDA```改成```DNN_TARGET_CUDA_FP16```提升推理速度（虽然是蚊子腿，好歹也是肉（： 
+#### 2022.03.29 更新：  
 
 + 新增P6模型支持，可以通过yolo.h中定义的YOLO_P6切换  
 
