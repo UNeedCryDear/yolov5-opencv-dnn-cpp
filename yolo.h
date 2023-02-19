@@ -10,41 +10,39 @@ struct Output {
 	cv::Rect box;       //矩形框
 };
 
-class Yolo {
+class Yolov5 {
 public:
-	Yolo() {
+	Yolov5() {
 	}
-	~Yolo() {}
+	~Yolov5() {}
 	bool readModel(cv::dnn::Net& net, std::string& netPath, bool isCuda);
 	bool Detect(cv::Mat& SrcImg, cv::dnn::Net& net, std::vector<Output>& output);
 	void drawPred(cv::Mat& img, std::vector<Output> result, std::vector<cv::Scalar> color);
 
 private:
+
+	void LetterBox(const cv::Mat& image, cv::Mat& outImage,
+		cv::Vec4d& params, //[ratio_x,ratio_y,dw,dh]
+		const cv::Size& newShape = cv::Size(640, 640),
+		bool autoShape = false,
+		bool scaleFill = false,
+		bool scaleUp = true,
+		int stride = 32,
+		const cv::Scalar& color = cv::Scalar(114, 114, 114));
+
 #if(defined YOLO_P6 && YOLO_P6==true)
-	const float netAnchors[4][6] = { { 19,27, 44,40, 38,94 },{ 96,68, 86,152, 180,137 },{ 140,301, 303,264, 238,542 },{ 436,615, 739,380, 925,792 } };
-
-	const int netWidth = 1280;  //ONNX图片输入宽度
-	const int netHeight = 1280; //ONNX图片输入高度
-
-	const int strideSize = 4;  //stride size
+	const int _netWidth = 1280;  //ONNX图片输入宽度
+	const int _netHeight = 1280; //ONNX图片输入高度
 #else
-	const float netAnchors[3][6] = { { 10,13, 16,30, 33,23 },{ 30,61, 62,45, 59,119 },{ 116,90, 156,198, 373,326 } };
-	
-	const int netWidth = 640;   //ONNX图片输入宽度
-	const int netHeight = 640;  //ONNX图片输入高度
-	
-	const int strideSize = 3;   //stride size
+
+	const int _netWidth = 640;   //ONNX图片输入宽度
+	const int _netHeight = 640;  //ONNX图片输入高度
 #endif // YOLO_P6
 
-	const float netStride[4] = { 8, 16.0,32,64 };
+	float _classThreshold = 0.25;
+	float _nmsThreshold = 0.45;
 
-	float boxThreshold = 0.25;
-	float classThreshold = 0.25;
-
-	float nmsThreshold = 0.45;
-	float nmsScoreThreshold = boxThreshold * classThreshold;
-
-	std::vector<std::string> className = { "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
+	std::vector<std::string> _className = { "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
 		"fire hydrant", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep", "cow",
 		"elephant", "bear", "zebra", "giraffe", "backpack", "umbrella", "handbag", "tie", "suitcase", "frisbee",
 		"skis", "snowboard", "sports ball", "kite", "baseball bat", "baseball glove", "skateboard", "surfboard",

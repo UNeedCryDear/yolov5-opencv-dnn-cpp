@@ -1,4 +1,4 @@
-#include "stdafx.h"
+
 #include "yolo.h"
 #include <iostream>
 #include<opencv2//opencv.hpp>
@@ -10,8 +10,8 @@ using namespace dnn;
 
 int main()
 {
-	string img_path = "./image/bus.jpg";
-	string model_path = "yolov5s.onnx";
+	string img_path = "./images/bus.jpg";
+	string model_path = "./models/yolov5s.onnx";
 	//int num_devices = cv::cuda::getCudaEnabledDeviceCount();
 	//if (num_devices <= 0) {
 		//cerr << "There is no cuda." << endl;
@@ -21,7 +21,7 @@ int main()
 		//cout << num_devices << endl;
 	//}
 
-	Yolo test;
+	Yolov5 test;
 	Net net;
 	if (test.readModel(net, model_path, false)) {
 		cout << "read net ok!" << endl;
