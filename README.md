@@ -12,6 +12,9 @@ https://github.com/ultralytics/yolov5/blob/c98128fe71a8676037a0605ab389c7473c743
 ```
 $ python path/to/export.py --weights yolov5s.pt --img [640,640] --opset 12 --include onnx
 ```
+#### 2023.02.19 更新：
++ 旧代码已经是两年之前的了，之前为了适应yolov5-5.0的版本，后处理部分留下太多繁琐的操作，包括像计算anchors，需要设置对应的stride等等。本次更新将会优化这部分内容，同时加上预处理部分的LetterBox(),与python下的源码保持一致性的预处理方式。
+
 #### 2022.12.13 更新：
 + 如果你的显卡支持FP16推理的话，可以将模型读取代码中的```DNN_TARGET_CUDA```改成```DNN_TARGET_CUDA_FP16```提升推理速度（虽然是蚊子腿，好歹也是肉（： 
 #### 2022.03.29 更新：  
