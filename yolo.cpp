@@ -112,8 +112,6 @@ bool Yolov5::Detect(Mat& SrcImg, Net& net, vector<Output>& output) {
 	std::vector<int> classIds;//结果id数组
 	std::vector<float> confidences;//结果每个id对应置信度数组
 	std::vector<cv::Rect> boxes;//每个id矩形框
-	float ratio_h = (float)netInputImg.rows / _netHeight;
-	float ratio_w = (float)netInputImg.cols / _netWidth;
 	int net_width = _className.size() + 5;  //输出的网络宽度是类别数+5
 	int net_out_width = netOutputImg[0].size[2];
 	assert(net_out_width == net_width, "Error Wrong number of _className");  //模型类别数目不对
@@ -133,11 +131,11 @@ bool Yolov5::Detect(Mat& SrcImg, Net& net, vector<Output>& output) {
 				float y = (pdata[1] - params[3]) / params[1];
 				float w = pdata[2] / params[0];
 				float h = pdata[3] / params[1];
-				int left = MAX(round(x - 0.5 * w ), 0);
-				int top = MAX(round(y - 0.5 * h ), 0);
+				int left = MAX(round(x - 0.5 * w +0.5), 0);
+				int top = MAX(round(y - 0.5 * h+0.5 ), 0);
 				classIds.push_back(classIdPoint.x);
 				confidences.push_back(max_class_socre );
-				boxes.push_back(Rect(left, top, round(w * ratio_w), round(h * ratio_h)));
+				boxes.push_back(Rect(left, top, int(w + 0.5), int(h + 0.5)));
 			}
 		}
 		pdata += net_width;//下一行
