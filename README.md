@@ -1,7 +1,8 @@
 # yolov5-opencv-dnn-cpp
 使用opencv模块部署yolov5-6.0版本
-
 基于6.0版本的yolov5:https://github.com/ultralytics/yolov5
+
+## The Yolov5 code has been merged into https://github.com/UNeedCryDear/yolov5-seg-opencv-onnxruntime-cpp, and the repository will no longer be updated.
 
 **OpenCV>=4.5.0**
 
